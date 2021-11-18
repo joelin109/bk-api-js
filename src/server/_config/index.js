@@ -13,7 +13,7 @@ if (run_model == 'local') {
             port: "3306",
             user: 'root',
             password: 'joelin502',
-            database: 'de_web',
+            database: 'bk_api',
             debug: false
         },
         redis: {

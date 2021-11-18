@@ -15,8 +15,8 @@ exports.autoUser = async (req, res, next) => {
     const token = _request.token;
 
     console.log(`token ---> ${token}`);
-    if (token) {
-        let data = await cookieCache.get(token);
+    if (token && token !== "") {
+        let data = null;//await cookieCache.get(token);
         // console.log(`data ---> ${JSON.stringify(data)}`)
         if (data) {
             req.user = data.user;
@@ -50,7 +50,7 @@ exports.requireUser = function (req, res, next) {
         next();
     } else {
         if (req.url.indexOf('/api/') === 0) {
-            resUtil.error(res, 'no_login'); // error_code 兼容之前版本
+            HttpUtil.Response.error(res, 'no_login'); // error_code 兼容之前版本
         } else {
             res.redirect('/login?go=' + encodeURIComponent(req.url));
         }

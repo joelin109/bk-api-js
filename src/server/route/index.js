@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../_config/apiConf');
-// const requireUser = require('../middleware/request').requireUser;
+const requireUser = require('../middleware/request').requireUser;
 const CommonService = require('../service');
 const UserAction = require('../controller/user_action');
 const WordAction = require('../controller/word_action');
@@ -16,7 +16,7 @@ router.get(config.APIURL_DataBase_Connection_Testing, function (req, res) {
 });
 
 
- router.post(config.APIURL_Content_Dictionary_List, function (req, res) {
+ router.post(config.APIURL_Content_Dictionary_List, requireUser, function (req, res) {
 
     WordAction.getWordList(req, res)
 
@@ -35,9 +35,7 @@ router.post(config.APIURL_Content_Dictionary_Update, function (req, res) {
 });
 
 
-// router.post(config.APIURL_Content_Dictionary_Remove, requireUser, function (req, res) {
-
-router.post(config.APIURL_Content_Dictionary_Remove, function (req, res) {
+router.post(config.APIURL_Content_Dictionary_Remove, requireUser, function (req, res) {
 
     WordAction.removeWord(req, res)
 

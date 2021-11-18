@@ -1,21 +1,22 @@
-let express = require('express');
+const express = require('express');
 let session = require('express-session');
-let cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 require('./server/dao/util.dao.msql');
-let Config = require('../webConfig');
-let router = require('./server/route/index');
+// const Config = require('../webConfig');
+const router = require('./server/route/index');
+const autoUser = require('./server/middleware/request').autoUser;
 let app = express();
-let app_port = process.env.PORT || 5003;
+const app_port = process.env.PORT || 5003;
 
 
-app.use(session({
+/* app.use(session({
     //store: new RedisStore(Config.redis),
     key: Config.session.key,
     secret: Config.session.secret,
     cookie: Config.session.cookie,
     resave: Config.session.resave,
     saveUninitialized: Config.session.saveUninitialized
-}));
+})); */
 
 
 app.use(express.json())
@@ -42,7 +43,7 @@ app.all('*', function (req, res, next) {
 /* let api = require('./src/service/api_register');
 api.register(app)  */
 
-
+app.use(autoUser);
 app.use('/', router);
 /* app.set('port', app_port);  */
 app.listen(app_port, function () {

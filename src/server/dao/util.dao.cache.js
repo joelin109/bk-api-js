@@ -1,4 +1,4 @@
-const Config = require('../Config');
+const Config = require('./../_config');
 const redis = require('redis');
 
 // cookie

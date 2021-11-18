@@ -1,8 +1,6 @@
 const express = require('express');
-let session = require('express-session');
 const cookieParser = require('cookie-parser');
 require('./server/dao/util.dao.msql');
-// const Config = require('../webConfig');
 const router = require('./server/route/index');
 const autoUser = require('./server/middleware/request').autoUser;
 let app = express();
@@ -40,12 +38,8 @@ app.all('*', function (req, res, next) {
 });
 
 
-/* let api = require('./src/service/api_register');
-api.register(app)  */
-
 app.use(autoUser);
 app.use('/', router);
-/* app.set('port', app_port);  */
 app.listen(app_port, function () {
 
     console.log('Express server listening on port ' + app_port);

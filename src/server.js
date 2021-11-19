@@ -1,9 +1,9 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-require('./server/dao/util.dao.msql');
 const router = require('./server/route/index');
 const autoUser = require('./server/middleware/request').autoUser;
-let app = express();
+require('./server/dao/util.dao.msql');
+const app = express();
 const app_port = process.env.PORT || 5003;
 
 
